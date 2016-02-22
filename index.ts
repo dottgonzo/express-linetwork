@@ -54,47 +54,73 @@ export = class NetRouter {
         Router.get('/', function(req, res) {
             res.send('Manager home page');
         });
+        Router.get('/connect', function(req, res) {
+            this.NetManager.connection(req.body.recovery).then(function() {
+                res.send({ ok: true });
+            }).catch(function() {
+                res.send({ ok: false });
 
+            });
+        });
         Router.get('/list', function(req, res) {
             res.send(this.NetManager.networks());
         });
 
-        Router.get('/mobile/provider', function(req, res) {
-            res.send('Manager home page');
-        });
+
+
         Router.get('/mobile', function(req, res) {
-            res.send('Manager home page');
+            res.send('Manager mobile page');
 
         });
         Router.get('/mobile/providers', function(req, res) {
-            res.send('Manager home page');
+            res.send(this.NetManager.mobileproviders());
+
+        });
+        Router.get('/mobile/providers/country', function(req, res) {
+            let providers = this.NetManager.mobileproviders();
+            res.send(providers.country(req.body.country));
 
         });
         Router.get('/recovery', function(req, res) {
-            res.send('Manager home page');
+            this.NetManager.recovery().then(function() {
+                res.send({ ok: true });
+            }).catch(function() {
+                res.send({ ok: false });
+            });
 
         });
-        Router.post('/recovery/wpa', function(req, res) {
+        Router.post('/configuration', function(req, res) {
             console.log('Manager home page');
 
         });
         Router.get('/wifi', function(req, res) {
-            res.send('Manager home page');
+            res.send('Manager wifi page');
         });
+
         Router.get('/wifi/wpa', function(req, res) {
-            res.send('Manager home page');
-        });
-        Router.get('/wifi/wpa.json', function(req, res) {
-            res.send('Manager home page');
+            let wpamanager = this.NetManager.wpamanager();
+            res.send(wpamanager.list);
+
+
         });
         Router.post('/wifi/wpa/add', function(req, res) {
-            console.log('Manager home page');
+            let wpamanager = this.NetManager.wpamanager();
+            wpamanager.add(req.body.ssid, req.body.password, req.body.priority).then(function() {
+                res.send({ ok: true });
+            }).catch(function() {
+                res.send({ ok: false });
+            })
+
         });
         Router.post('/wifi/wpa/remove', function(req, res) {
-            console.log('Manager home page');
-        });
-        Router.get('/connect', function(req, res) {
-            NetManager.connection(req.body.recovery)
+            let wpamanager = this.NetManager.wpamanager();
+            wpamanager.remove(req.body.ssid).then(function() {
+                res.send({ ok: true });
+            }).catch(function() {
+                res.send({ ok: false });
+            })
+
+
         });
 
         return Router;
