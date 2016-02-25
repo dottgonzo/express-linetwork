@@ -28,7 +28,7 @@ interface ClassOpt {
     wpasupplicant_path?: string;
 }
 
-export = class NetManager extends linetwork{
+export = class NetManager extends linetwork {
     NetManager;
     constructor(conf: ClassOpt) {
         super(conf);
@@ -53,7 +53,12 @@ export = class NetManager extends linetwork{
             });
         });
         Router.get('/list', function(req, res) {
-            res.send(NetManager.networks());
+            NetManager.networks().then(function(n) {
+                res.send(n);
+            }).then(function(err) {
+                res.send(err);
+            })
+
         });
 
 
@@ -63,9 +68,9 @@ export = class NetManager extends linetwork{
             res.send(NetManager.mobileproviders());
 
         });
-        Router.get('/mobile/providers/country', function(req, res) {
+        Router.get('/mobile/providers/country/:country', function(req, res) {
             let providers = NetManager.mobileproviders();
-            res.send(providers.country(req.body.country));
+            res.send(providers.country(req.params.country));
 
         });
         Router.get('/recovery', function(req, res) {
@@ -87,18 +92,18 @@ export = class NetManager extends linetwork{
 
 
         });
-        Router.post('/wifi/wpa/add', function(req, res) {
+        Router.post('/wifi/wpa/add/:ssid/:password/:priority', function(req, res) {
             let wpamanager = NetManager.wpamanager();
-            wpamanager.addwpa(req.body.ssid, req.body.password, req.body.priority).then(function() {
+            wpamanager.addwpa(req.params.ssid, req.params.password, req.params.priority).then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
             })
 
         });
-        Router.post('/wifi/wpa/remove', function(req, res) {
+        Router.post('/wifi/wpa/remove/:ssid', function(req, res) {
             let wpamanager = NetManager.wpamanager();
-            wpamanager.removewpa(req.body.ssid).then(function() {
+            wpamanager.removewpa(req.params.ssid).then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
