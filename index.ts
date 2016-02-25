@@ -12,14 +12,9 @@ interface IProvider {
 }
 
 interface IMobile {
-    provider?: IProvider;
-    options?: {
-        verbose?: boolean;
-        wvdialFile?: string;
-        dev?: any;
-        ifOffline?: boolean;
-        retry?: boolean;
-    };
+    provider: IProvider;
+    device?: any;
+    configFilePath?: string;
 }
 interface IHostapdcf {
     driver?: string;
@@ -27,35 +22,30 @@ interface IHostapdcf {
     wpa_passphrase: any;
 };
 interface ClassOpt {
-    port: number;
-    recovery_interface?: string;
+    wifi_interface?: string;
     mobile?: IMobile;
     hostapd?: IHostapdcf;
     wpasupplicant_path?: string;
 }
 
-export = class NetRouter {
+export = class NetManager extends linetwork{
     NetManager;
     constructor(conf: ClassOpt) {
-        this.NetManager = new linetwork(conf);
+        super(conf);
 
     }
 
-    connect(recovery) {
-        this.NetManager.connection(recovery)
-    }
 
     Router() {
-        let NetManager = this.NetManager;
+        let NetManager = this;
         let Router = express.Router();
         
         
         // define the home page route
-        Router.get('/', function(req, res) {
-            res.send('Manager home page');
-        });
+
+        
         Router.get('/connect', function(req, res) {
-            this.NetManager.connection(req.body.recovery).then(function() {
+            NetManager.connection(req.body.recovery).then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
@@ -63,26 +53,23 @@ export = class NetRouter {
             });
         });
         Router.get('/list', function(req, res) {
-            res.send(this.NetManager.networks());
+            res.send(NetManager.networks());
         });
 
 
 
-        Router.get('/mobile', function(req, res) {
-            res.send('Manager mobile page');
 
-        });
         Router.get('/mobile/providers', function(req, res) {
-            res.send(this.NetManager.mobileproviders());
+            res.send(NetManager.mobileproviders());
 
         });
         Router.get('/mobile/providers/country', function(req, res) {
-            let providers = this.NetManager.mobileproviders();
+            let providers = NetManager.mobileproviders();
             res.send(providers.country(req.body.country));
 
         });
         Router.get('/recovery', function(req, res) {
-            this.NetManager.recovery().then(function() {
+            NetManager.recovery().then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
@@ -93,19 +80,16 @@ export = class NetRouter {
             console.log('Manager home page');
 
         });
-        Router.get('/wifi', function(req, res) {
-            res.send('Manager wifi page');
-        });
 
         Router.get('/wifi/wpa', function(req, res) {
-            let wpamanager = this.NetManager.wpamanager();
-            res.send(wpamanager.list);
+            let wpamanager = NetManager.wpamanager();
+            res.send(wpamanager.listwpa);
 
 
         });
         Router.post('/wifi/wpa/add', function(req, res) {
-            let wpamanager = this.NetManager.wpamanager();
-            wpamanager.add(req.body.ssid, req.body.password, req.body.priority).then(function() {
+            let wpamanager = NetManager.wpamanager();
+            wpamanager.addwpa(req.body.ssid, req.body.password, req.body.priority).then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
@@ -113,13 +97,12 @@ export = class NetRouter {
 
         });
         Router.post('/wifi/wpa/remove', function(req, res) {
-            let wpamanager = this.NetManager.wpamanager();
-            wpamanager.remove(req.body.ssid).then(function() {
+            let wpamanager = NetManager.wpamanager();
+            wpamanager.removewpa(req.body.ssid).then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
             })
-
 
         });
 

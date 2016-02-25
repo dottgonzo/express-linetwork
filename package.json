@@ -18,7 +18,7 @@
   "homepage": "https://github.com/dottgonzo/express-linetwork#readme",
   "dependencies": {
     "express": "^4.13.4",
-    "linetwork": "0.0.29"
+    "linetwork": "0.0.35"
   },
   "devDependencies": {
     "chai": "^3.5.0",

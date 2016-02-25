@@ -2,7 +2,6 @@ import * as express from "express";
 import Manager=require("../index");
 
 let options={
-  port:4000,
   wpasupplicant_path:"dd",
   hostapd:{
     driver:'rtl871xdrv',
@@ -23,9 +22,13 @@ let options={
   }
 };
 
-let NetManager=new Manager(options);
+ let NetManager=new Manager(options);
 let app=express();
-app.use('/birds', NetManager.Router());
+
+app.use('/networking', NetManager.Router());
+
+
+
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+  console.log('3000!');
 });
