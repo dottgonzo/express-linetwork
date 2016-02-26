@@ -44,8 +44,8 @@ export = class NetManager extends linetwork {
         // define the home page route
 
         
-        Router.get('/connect', function(req, res) {
-            NetManager.connection(req.body.recovery).then(function() {
+        Router.get('/connect/:recovery', function(req, res) {
+            NetManager.connection(req.params.recovery).then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
@@ -92,7 +92,7 @@ export = class NetManager extends linetwork {
 
 
         });
-        Router.post('/wifi/wpa/add/:ssid/:password/:priority', function(req, res) {
+        Router.post('/wifi/wpa/add', function(req, res) {
             let wpamanager = NetManager.wpamanager();
             wpamanager.addwpa(req.params.ssid, req.params.password, req.params.priority).then(function() {
                 res.send({ ok: true });

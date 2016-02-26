@@ -2,7 +2,7 @@ import * as express from "express";
 import Manager=require("../index");
 
 let options={
-  wpasupplicant_path:"dd",
+  wpasupplicant_path:"/etc/wpa_supplicant/wpa_supplicant.conf",
   hostapd:{
     driver:'rtl871xdrv',
     ssid:'testttap',
@@ -16,9 +16,7 @@ let options={
       username:"tre",
       password:"tre"
     },
-    options:{
-      retry:false
-    }
+    device:1-1.4
   }
 };
 
