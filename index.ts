@@ -1,5 +1,5 @@
 import * as express from "express";
-import linetwork = require("linetwork");
+import linetwork from "linetwork";
 
 interface IProvider {
 
@@ -28,7 +28,7 @@ interface ClassOpt {
     wpasupplicant_path?: string;
 }
 
-export = class NetManager extends linetwork {
+export default class NetManager extends linetwork {
     NetManager;
     constructor(conf: ClassOpt) {
         super(conf);

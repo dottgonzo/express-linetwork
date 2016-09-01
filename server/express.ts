@@ -1,5 +1,5 @@
 import * as express from "express";
-import Manager=require("../index");
+import Manager from "../index";
 
 let options={
   wpasupplicant_path:"/etc/wpa_supplicant/wpa_supplicant.conf",

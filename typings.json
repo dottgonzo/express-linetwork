@@ -1,15 +1,18 @@
 {
-  "dependencies": {},
-  "devDependencies": {},
-  "ambientDependencies": {
-    "async": "github:DefinitelyTyped/DefinitelyTyped/async/async.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
-    "bluebird": "github:DefinitelyTyped/DefinitelyTyped/bluebird/bluebird.d.ts#dd328830dddffbe19e9addd7cf8532cbd3600816",
-    "deep-diff": "github:DefinitelyTyped/DefinitelyTyped/deep-diff/deep-diff.d.ts#5576e902151dc027bcf308728a46817a7ee4248c",
-    "express": "github:DefinitelyTyped/DefinitelyTyped/express/express.d.ts#dd4626a4e23ce8d6d175e0fe8244a99771c8c3f2",
-    "lodash": "github:DefinitelyTyped/DefinitelyTyped/lodash/lodash.d.ts#7b7aa2027a8fb6219a8bcf1b6bb12bcd0ff9539d",
-    "mime": "github:DefinitelyTyped/DefinitelyTyped/mime/mime.d.ts#cb5206a8ac1c9a3ddfd126f5ecea6729b2361452",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#20e1eb9616922d382d918cc5a21870a9dbe255f5",
-    "path-exists": "github:DefinitelyTyped/DefinitelyTyped/path-exists/path-exists.d.ts#9b4dfcf8d8f234b8e1cf97e0a95d51e90d39c67e",
-    "serve-static": "github:DefinitelyTyped/DefinitelyTyped/serve-static/serve-static.d.ts#0fa4e9e61385646ea6a4cba2aef357353d2ce77f"
+  "globalDevDependencies": {
+    "async": "registry:dt/async#2.0.1+20160804113311",
+    "chai": "registry:dt/chai#3.4.0+20160601211834",
+    "deep-diff": "registry:dt/deep-diff#0.0.0+20160317120654",
+    "lodash": "registry:dt/lodash#4.14.0+20160830145422",
+    "mocha": "registry:dt/mocha#2.2.5+20160720003353",
+    "node": "registry:dt/node#6.0.0+20160831021119",
+    "path-exists": "registry:dt/path-exists#1.0.0+20160316155526"
+  },
+  "globalDependencies": {
+    "bluebird": "registry:dt/bluebird#3.0.0+20160811111256",
+    "express": "registry:dt/express#4.0.0+20160708185218",
+    "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20160829034835",
+    "mime": "registry:dt/mime#0.0.0+20160316155526",
+    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
   }
 }
