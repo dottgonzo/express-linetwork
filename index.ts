@@ -17,7 +17,7 @@ interface IMobile {
     configFilePath?: string;
 }
 interface IHostapdcf {
-    driver?: string;
+    driver: string;
     ssid: string;
     wpa_passphrase: any;
 };
@@ -45,7 +45,7 @@ export default class NetManager extends linetwork {
 
         
         Router.get('/connect/:recovery', function(req, res) {
-            NetManager.connection(req.params.recovery).then(function() {
+            NetManager.connection().then(function() {
                 res.send({ ok: true });
             }).catch(function() {
                 res.send({ ok: false });
