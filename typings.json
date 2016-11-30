@@ -6,7 +6,8 @@
     "lodash": "registry:dt/lodash#4.14.0+20160830145422",
     "mocha": "registry:dt/mocha#2.2.5+20160720003353",
     "node": "registry:dt/node#6.0.0+20160831021119",
-    "path-exists": "registry:dt/path-exists#1.0.0+20160316155526"
+    "path-exists": "registry:dt/path-exists#1.0.0+20160316155526",
+    "typescript": "registry:dt/typescript#0.4.0+20160317120654"
   },
   "globalDependencies": {
     "bluebird": "registry:dt/bluebird#3.0.0+20160811111256",
